@@ -4,6 +4,7 @@ function init() {
   });
 }
 const ruta = "../../controllers/usuario.controllers.php?op=";
+
 $().ready(() => {
   CargaLista();
 });
@@ -12,20 +13,22 @@ var CargaLista = () => {
   var html = "";
   $.get(ruta + "todos", (ListUsuarios) => {
     ListUsuarios = JSON.parse(ListUsuarios);
+    console.log(ListUsuarios);
     $.each(ListUsuarios, (index, usuario) => {
       html += `<tr>
             <td>${index + 1}</td>
-            <td>${usuario.Nombres}</td>
-            <td>${usuario.Apellidos}</td>
-            <td>${usuario.Rol}</td>
+            <td>${usuario.nombre_usuario}</td>
+            <td>${usuario.nombre}</td>
 <td>
 <button class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#ModalUsuarios" onclick='uno(${
-        usuario.idUsuarios
+        usuario.id
       })'>Editar</button>
 <button class='btn btn-warning' click='eliminar(${
-        usuario.idUsuarios
+        usuario.id
       })'>Editar</button>
-           </td></tr> `;
+           </td>
+           
+           </tr> `;
     });
     $("#ListaUsuarios").html(html);
   });
@@ -39,10 +42,14 @@ var GuardarEditar = (e) => {
 
   if (SucursalId > 0) {
     accion = ruta + "actualizar";
+    DatosFormularioUsuario.append("id", SucursalId);
   } else {
     accion = ruta + "insertar";
   }
 
+  for (var pair of DatosFormularioUsuario.entries()) {
+    console.log(pair[0]+ ', ' + pair[1]); 
+}
   $.ajax({
     url: accion,
     type: "post",
@@ -65,52 +72,32 @@ var GuardarEditar = (e) => {
 };
 
 var uno = async (idUsuarios) => {
-  await sucursales();
+  console.log(idUsuarios);
   await roles();
   $.post(ruta + "uno", { idUsuarios: idUsuarios }, (usuarios) => {
     usuarios = JSON.parse(usuarios);
     console.log(usuarios);
-    document.getElementById("idUsuarios").value = usuarios.idUsuarios;
-    document.getElementById("Cedula").value = usuarios.Cedula;
-    document.getElementById("Nombres").value = usuarios.Nombres;
-    document.getElementById("Apellidos").value = usuarios.Apellidos;
-    document.getElementById("Correo").value = usuarios.Correo;
+    document.getElementById("idUsuarios").value = usuarios.id;
+    document.getElementById("NombreUsuario").value = usuarios.nombre_usuario;
     document.getElementById("contrasenia").value = usuarios.contrasenia;
-    document.getElementById("RolId").value = usuarios.idRoles;
-    document.getElementById("SucursalId").value = usuarios.SucursalId;
+    document.getElementById("id_rol").value = usuarios.id_rol;
+  
   });
 };
 
-var sucursales = () => {
-  return new Promise((resolve, reject) => {
-    var html = `<option value="0">Seleccione una opción</option>`;
-    $.post(
-      "../../controllers/sucursal.controllers.php?op=todos",
-      async (ListaSucursales) => {
-        ListaSucursales = JSON.parse(ListaSucursales);
-        $.each(ListaSucursales, (index, sucursal) => {
-          html += `<option value="${sucursal.SucursalId}">${sucursal.Nombre}</option>`;
-        });
-        await $("#SucursalId").html(html);
-        resolve();
-      }
-    ).fail((error) => {
-      reject(error);
-    });
-  });
-};
 
 var roles = () => {
+
   return new Promise((resolve, reject) => {
     var html = `<option value="0">Seleccione una opción</option>`;
     $.post(
-      "../../controllers/rol.controllers.php?op=todos",
+      "../../controllers/roles.controllers.php?op=todos",
       async (ListaRoles) => {
         ListaRoles = JSON.parse(ListaRoles);
         $.each(ListaRoles, (index, rol) => {
-          html += `<option value="${rol.idRoles}">${rol.Rol}</option>`;
+          html += `<option value="${rol.id}">${rol.nombre}</option>`;
         });
-        await $("#RolId").html(html);
+        await $("#id_rol").html(html);
         resolve();
       }
     ).fail((error) => {
@@ -123,11 +110,25 @@ var eliminar = () => {};
 
 var LimpiarCajas = () => {
   document.getElementById("idUsuarios").value = "";
-  document.getElementById("Cedula").value = "";
-  document.getElementById("Nombres").value = "";
-  document.getElementById("Apellidos").value = "";
-  document.getElementById("Correo").value = "";
+  document.getElementById("NombreUsuario").value = "";
   document.getElementById("contrasenia").value = "";
   $("#ModalUsuarios").modal("hide");
 };
+
+
+
 init();
+
+
+
+
+
+
+
+
+
+
+
+
+
+

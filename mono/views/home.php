@@ -34,7 +34,8 @@ if ($_SESSION['Rol'] == 'ADMINISTRADOR') {
                     <div class="content-wrapper">
                         <!-- Content -->
                         <div class="container-xxl flex-grow-1 container-p-y">
-                            <iframe name="base" id="base" src="graficos.php" style="border: none;" width="100%" height="1000px"></iframe>
+                            <iframe name="base" id="base" src="graficos.php" style="border: none;" 
+                            width="100%" height="1000px"></iframe>
                         </div>
                         <!-- / Content -->
 

@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 /*TODO: Requerimientos */
 require_once('../config/sesiones.php');
 require_once("../models/usuario.models.php");
@@ -37,17 +37,17 @@ switch ($_GET["op"]) {
         $Contrasenia = $_POST["contrasenia"];
         $id_rol = $_POST["id_rol"];
         $datos = array();
-        $datos = $Usuarios->Insertar($NombreUsuario,  md5($Contrasenia),  $id_rol, 'curdate()');
+        $datos = $Usuarios->Insertar($NombreUsuario,  md5($Contrasenia),  $id_rol);
         echo json_encode($datos);
         break;
         /*TODO: Procedimiento para actualizar */
     case 'actualizar':
-        $idUsuarios = $_POST["idUsuarios"];
-        $nombre_usuario = $_POST["nombre_usuario"];
-        $contrasena = $_POST["contrasena"];
+        $idUsuarios = $_POST["id"];
+        $nombre_usuario = $_POST["NombreUsuario"];
+        $contrasena = $_POST["contrasenia"];
         $id_rol = $_POST["id_rol"];
         $datos = array();
-        $datos = $Usuarios->Actualizar($idUsuarios, $nombre_usuario, $contrasena, $id_rol, 'curdate()');
+        $datos = $Usuarios->Actualizar($idUsuarios, $nombre_usuario, $contrasena, $id_rol);
         echo json_encode($datos);
         break;
         /*TODO: Procedimiento para eliminar */

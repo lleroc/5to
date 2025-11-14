@@ -9,7 +9,7 @@ class Usuarios
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoConectar();
-        $cadena = "SELECT * FROM `usuarios` inner JOIN roles on usuarios.id_rol = roles.id";
+        $cadena = "SELECT usuarios.*, roles.id as IdRol, roles.nombre FROM `usuarios` inner JOIN roles on usuarios.id_rol = roles.id";
         $datos = mysqli_query($con, $cadena);
         return $datos;
         $con->close();
@@ -36,11 +36,12 @@ class Usuarios
     }
    
     /*TODO: Procedimiento para insertar */
-    public function Insertar($nombre_usuario, $contrasena, $id_rol, $fecha_creacion)
+    public function Insertar($nombre_usuario, $contrasena, $id_rol)
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoConectar();
-        $cadena = "INSERT into usuarios(nombre_usuario, contrasena, id_rol, fecha_creacion) values ( '$nombre_usuario', '$contrasena', $id_rol, '$fecha_creacion')";
+        $cadena = "INSERT into usuarios(nombre_usuario, contrasena, id_rol, fecha_creacion) 
+        values ( '$nombre_usuario', '$contrasena', $id_rol, curdate())";
         if (mysqli_query($con, $cadena)) {
             return 'ok';
         } else {
@@ -51,11 +52,12 @@ class Usuarios
    
 
     /*TODO: Procedimiento para actualizar */
-    public function Actualizar($idUsuarios, $nombre_usuario, $contrasena, $id_rol, $fecha_creacion)
+    public function Actualizar($idUsuarios, $nombre_usuario, $contrasena, $id_rol)
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoConectar();
-        $cadena = "update usuarios set nombre_usuario='$nombre_usuario', contrasena='$contrasena', id_rol=$id_rol, fecha_creacion='$fecha_creacion' where idUsuarios= $idUsuarios";
+        $cadena = "update usuarios set nombre_usuario='$nombre_usuario', contrasena='$contrasena', id_rol=$id_rol, fecha_creacion=curdate() where id= $idUsuarios";
+      
         if (mysqli_query($con, $cadena)) {
 
             return 'ok';

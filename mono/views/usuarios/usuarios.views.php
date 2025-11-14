@@ -4,17 +4,15 @@ require_once('../../config/sesiones.php');  ?>
 
 <!-- Basic Bootstrap Table -->
 <div class="card">
-    <button type="button" class="btn btn-outline-secondary" onclick="sucursales(); roles()" data-bs-toggle="modal" data-bs-target="#ModalUsuarios">Nuevo Usuario</button>
-
-
+    <button type="button" class="btn btn-outline-secondary" onclick="roles()" 
+    data-bs-toggle="modal" data-bs-target="#ModalUsuarios">Nuevo Usuario</button>
     <h5 class="card-header">Lista de Usuarios</h5>
     <div class="table-responsive text-nowrap">
         <table class="table">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
+                    <th>Nombre de Usuario</th>
                     <th>Rol</th>
                     <th>Acciones</th>
                 </tr>
@@ -27,13 +25,14 @@ require_once('../../config/sesiones.php');  ?>
 </div>
 
 
+
 <!-- Modal Usuarios-->
 
 <div class="modal" tabindex="-1" id="ModalUsuarios">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="tituloModal"></h5>
+                <h5 class="modal-title" id="tituloModal"> Nuevo Usuario </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -41,30 +40,13 @@ require_once('../../config/sesiones.php');  ?>
                 <input type="hidden" name="idUsuarios" id="idUsuarios">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="Cedula">Cédula</label>
-                        <input type="text" name="Cedula" id="Cedula" class="form-control" placeholder="Ingrese sus nombres" required>
-                    </div>
-                    <div class="form-group">
                         <label for="Nombres">Nombres</label>
-                        <input type="text" name="Nombres" id="Nombres" class="form-control" placeholder="Ingrese sus nombres" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="Apellidos">Apelldios</label>
-                        <input type="text" name="Apellidos" id="Apellidos" class="form-control" placeholder="Ingrese sus apellidos" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="SucursalId">Sede</label>
-                        <select id="SucursalId" name="SucursalId" class="form-control">
-                        </select>
+                        <input type="text" name="NombreUsuario" id="NombreUsuario" class="form-control" placeholder="Ingrese sus nombres" required>
                     </div>
                     <div class="form-group">
                         <label for="RolId">Rol</label>
-                        <select id="RolId" name="RolId" class="form-control">
+                        <select id="id_rol" name="id_rol" class="form-control">
                         </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="Correo">Correo Electrónico</label>
-                        <input type="email" name="Correo" id="Correo" class="form-control" placeholder="Ingrese su Correo" required>
                     </div>
                     <div class="form-group">
                         <label for="contrasenia">Contraseña</label>

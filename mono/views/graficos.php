@@ -4,8 +4,6 @@
 
     <img src="../public/images/logo.jpeg" alt="User" class="rounded" style="width:50%" />
 
-
-
 </div>
 
 <?php require_once('html/scripts.php') ?>
