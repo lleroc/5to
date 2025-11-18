@@ -57,6 +57,12 @@ switch ($_GET["op"]) {
         $datos = $Usuarios->Eliminar($idUsuarios);
         echo json_encode($datos);
         break;
+     case 'eliminarsuave':
+        $idUsuarios = $_POST["idUsuarios"];
+        $datos = array();
+        $datos = $Usuarios->Eliminarsuave($idUsuarios);
+        echo json_encode($datos);
+        break;
         /*TODO: Procedimiento para insertar */
     case 'login2':
         $nombre_usuario = isset($_POST['nombre_usuario']) ? trim($_POST['nombre_usuario']) : '';
@@ -68,7 +74,7 @@ switch ($_GET["op"]) {
         }
 
         // Obtener fila del usuario
-        $fila = $Usuarios->login($nombre_usuario, $contrasenia);
+        $fila = $Usuarios->login($nombre_usuario, md5($contrasenia));
 
         if (!$fila) {
             header("Location:../login.php?op=1"); // Usuario no encontrado
@@ -111,7 +117,7 @@ switch ($_GET["op"]) {
 
         try {
             $datos = array();
-            $datos = $Usuarios->login1($nombre_usuario, ($contrasenia));
+            $datos = $Usuarios->login1($nombre_usuario, md5($contrasenia));
             $res = mysqli_fetch_assoc($datos);
         } catch (Throwable $th) {
             header("Location:../login.php?op=1");

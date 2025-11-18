@@ -1,8 +1,9 @@
+
 <?php
 //TODO: Requerimientos 
 require_once('../config/conexion.php');
 
-class Usuarios
+class Servicios
 {
     /*TODO: Procedimiento para sacar todos los registros*/
     public function todos()

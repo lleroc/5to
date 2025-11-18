@@ -46,8 +46,8 @@
                 </li>
 
                 <li class="menu-item">
-                    <a href="Roles/roles.views.php" target="base" class="menu-link">
-                        <div data-i18n="Fluid">Cargos</div>
+                    <a href="tipo_servicio/tipo_servicio.views.php" target="base" class="menu-link">
+                        <div data-i18n="Fluid">Servicios</div>
                     </a>
                 </li>
                 <li class="menu-item">

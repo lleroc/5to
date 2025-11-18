@@ -88,25 +88,6 @@ var uno = async (idUsuarios) => {
 };
 
 
-var roles = () => {
-
-  return new Promise((resolve, reject) => {
-    var html = `<option value="0">Seleccione una opción</option>`;
-    $.post(
-      "../../controllers/roles.controllers.php?op=todos",
-      async (ListaRoles) => {
-        ListaRoles = JSON.parse(ListaRoles);
-        $.each(ListaRoles, (index, rol) => {
-          html += `<option value="${rol.id}">${rol.nombre}</option>`;
-        });
-        await $("#id_rol").html(html);
-        resolve();
-      }
-    ).fail((error) => {
-      reject(error);
-    });
-  });
-};
 
 var eliminar = (idUsuarios) => {
   $.post(ruta + "eliminar", { idUsuarios: idUsuarios }, (respuesta) => {
@@ -137,7 +118,16 @@ var LimpiarCajas = () => {
   $("#ModalUsuarios").modal("hide");
 };
 
+var updateEstadoLabel = () => {
+  const estadoCheckbox = document.getElementById("estado");
+  const estadoLabel = document.getElementById("lblEstado");
 
+  if (estadoCheckbox.checked) {
+    estadoLabel.textContent = "Activo";
+  } else {
+    estadoLabel.textContent = "No Activo";
+  }
+}
 
 init();
 
