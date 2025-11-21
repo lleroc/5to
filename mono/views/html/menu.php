@@ -51,8 +51,8 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="Sedes/sedes.views.php" target="base" class="menu-link">
-                        <div data-i18n="Blank">Sedes</div>
+                    <a href="orden_trabajo/orden_trabajo.views.php" target="base" class="menu-link">
+                        <div data-i18n="Blank">Ordenes de Trabajo</div>
                     </a>
                 </li>
                 <li class="menu-item">
