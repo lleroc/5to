@@ -58,7 +58,6 @@ switch ($_GET["op"]) {
 
         // 1) Guardar primero el SERVICIO
         $idServicio = $Servicios->InsertarRetornarId($id_vehiculo, $id_usuario_serv, $fecha_servicio);
-        echo $idServicio. " id se servicio";
         if ($idServicio <= 0) {
             $respuesta["ok"]      = false;
             $respuesta["mensaje"] = "Error al insertar el servicio";

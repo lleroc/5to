@@ -221,6 +221,10 @@ function GuardarEditarOrden(e) {
 
       if (r.ok || r === "ok") {
         alert(r.mensaje || "Orden guardada con éxito");
+        // Si se retornó idServicio guardarlo en hidden para posible edición
+        if (r.idServicio) {
+          $("#idServicio").val(r.idServicio);
+        }
         CargaLista();
         LimpiarFormularioOrden();
       } else {
