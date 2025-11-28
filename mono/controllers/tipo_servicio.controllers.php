@@ -8,14 +8,38 @@ $Tipo_Servicio = new Tipo_Servicio;
 
 switch ($_GET["op"]) {
         /*TODO: Procedimiento para listar todos los registros */
+
+
     case 'todos':
         $datos = array();
         $datos = $Tipo_Servicio->todos();
+
+        $datoshtml = array();
         while ($row = mysqli_fetch_assoc($datos)) {
-            $todos[] = $row;
+            $unafila = array();
+            $unafila[] = $row["id_tipo_servicio"];
+            $unafila[] = $row["detalle"];
+            $unafila[] = $row["valor"];
+            $unafila[] = $row["estado"] ? '<span class="badge bg-success">Activo</span>' : '<span class="badge bg-danger">Inactivo</span>';
+            $unafila[] = '<button class="btn btn-primary btn-sm" onclick="editarTipo_Servicio(' . $row["id_tipo_servicio"] . ')" data-bs-toggle="modal" data-bs-target="#ModalTipo_Servicio"><i class="bx bx-edit"></i></button>
+                          <button class="btn btn-danger btn-sm" onclick="eliminarTipo_Servicio(' . $row["id_tipo_servicio"] . ')"><i class="bx bx-trash"></i></button>';
+            $datoshtml[] = $unafila;
         }
-        echo json_encode($todos);
+        $resultados = array(
+            "sEcho" => 1,
+            "iTotalRecords" => count($datoshtml),
+            "iTotalDisplayRecords" => count($datoshtml),
+            "aaData" => $datoshtml
+        );
+        echo json_encode($resultados);
         break;
+
+
+
+
+
+
+
         /*TODO: Procedimiento para sacar un registro */
     case 'uno':
         $idTipoServicio = $_POST["id_tipo_servicio"];
